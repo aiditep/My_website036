@@ -1,11 +1,513 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>แฟ้มสะสมผลงาน (Portfolio) </title>
+    <!-- Google Font (Sarabun) -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;      /* น้ำเงินเข้ม (Navy Blue) สื่อถึงความน่าเชื่อถือ */
+            --primary-light: #3b82f6;
+            --accent: #b45309;       /* สีทองหรูหราแบบทางการ */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border-top: 4px solid var(--primary);
+            border-bottom: 4px solid var(--primary);
+        }
+
+        /* --- ส่วนหัวโปรไฟล์ (แบบเป็นทางการ) --- */
+        .profile-header {
+            background-color: #ffffff;
+            color: var(--text-main);
+            text-align: center;
+            padding: 40px 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-img-container {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-header p {
+            font-size: 1rem;
+            max-width: 650px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        /* --- ส่วนเนื้อหาทั่วไป --- */
+        .content-section {
+            padding: 35px 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .content-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 8px;
+        }
+
+        /* --- ประวัติการศึกษา (Timeline แบบทางการ) --- */
+        .education-list {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
+            margin-left: 5px;
+        }
+
+        .education-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 15px;
+        }
+
+        .education-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: -21px;
+            top: 6px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .education-item h3 {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .education-item .year {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin: 2px 0 5px 0;
+        }
+
+        .education-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- ส่วนทักษะและความสามารถ --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .skill-category h3 {
+            font-size: 1.05rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 600;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 6px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 400;
+        }
+
+        /* --- เกียรติบัตร (Certificates) --- */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .cert-card {
+            background: #ffffff;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .cert-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .cert-img-wrapper {
+            height: 160px;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cert-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cert-info {
+            padding: 15px;
+        }
+
+        .cert-info h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .cert-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- กิจกรรม (Activities) --- */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            background: #ffffff;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .activity-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .activity-img-wrapper {
+            height: 160px;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .activity-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .activity-info {
+            padding: 15px;
+        }
+
+        .activity-info h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .activity-info .date {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .activity-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- ช่องทางการติดต่อ (Contact) --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .contact-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .contact-card:hover {
+            background: #f8fafc;
+            border-color: var(--primary);
+        }
+
+        .contact-card strong {
+            display: block;
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 3px;
+        }
+
+        .contact-card span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- ส่วนท้าย (Footer) --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--primary);
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        /* Responsive สำหรับมือถือ */
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+            .content-section {
+                padding: 25px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1 style="color: aqua;">Hi</h1>
+
+    <div class="container">
+        <!-- 1. ส่วนรูปภาพ ชื่อ และแนะนำตัว -->
+        <header class="profile-header">
+            <div class="profile-img-container">
+                <img src="WIN_20261028_19_54_13_Pro.jpg" alt="รูปโปรไฟล์" class="profile-img">
+            </div>
+            <h1>อดิเทพ ปลอดวงค์</h1>
+            <p>กำลังศึกษาอยู่ระดับปวช.ชั้นปีที่2 แผนกเทคโนโลยีสารสนเทศวิทยาลัยเทคนิคกระบี่สนใจในความรู้ด้านit,การบำรุงรักษาคอมพิวเตอร์,งานเครือข่ายเบื้องต้นและพัฒนาเว็บไซต์</p>
+        </header>
+
+        <!-- 2. ส่วนประวัติการศึกษา -->
+        <section class="content-section">
+            <h2 class="section-title">ประวัติการศึกษา</h2>
+            <div class="education-list">
+                <div class="education-item">
+                    <h3>กำลังศึกษาอยู่ระดับประกาศนียบัตรวิชาชีพ (ปวช.)</h3>
+                    <div class="year">ปี พ.ศ. 2568 - ปัจจุบัน</div>
+                    <p>สาขาวิชาเทคโนโลยีสารสนเทศ วิทยาลัยเทคนิคกระบี่</p>
+                </div>
+                <div class="education-item">
+                    <h3>ระดับประกาศนียบัตรมัธยมศึกษาตอนต้น</h3>
+                    <div class="year">ปี พ.ศ. 2565 - 2567</div>
+                    <p>โรงเรียนเทศบาล2คลองจิหลาด เกรดเฉลี่ยสะสม gpx 2.98</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ส่วนทักษะและความสามารถ -->
+        <section class="content-section">
+            <h2 class="section-title">ทักษะและความสามารถ</h2>
+            <div class="skills-grid">
+                
+                <div class="skill-category">
+                    <h3>ด้านฮาร์ดแวร์และอุปกรณ์คอมพิวเตอร์</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">ประกอบและอัปเกรดคอมพิวเตอร์</span>
+                        <span class="skill-tag">ตรวจเช็คและเปลี่ยนอะไหล่ฮาร์ดแวร์</span>
+                        <span class="skill-tag">การบำรุงรักษาเชิงป้องกัน (PM)</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>ด้านซอฟต์แวร์</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">ติดตั้ง Windows / Drivers</span>
+                        <span class="skill-tag">การแก้ไขปัญหาจอฟ้าและระบบรันล้มเหลว</span>
+                        <span class="skill-tag">ติดตั้งและจัดการโปรแกรมใช้งาน</span>
+                        <span class="skill-tag">Microsoft office</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. ส่วนเกียรติบัตร -->
+        <section class="content-section">
+            <h2 class="section-title">เกียรติบัตรและผลงาน</h2>
+            <div class="certificates-grid">
+                
+                <div class="cert-card">
+                    <div class="cert-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=500&q=80" alt="เกียรติบัตร 1" class="cert-img">
+                    </div>
+                    <div class="cert-info">
+                        <h3>การแข่งขันซ่อมบำรุงระบบคอมพิวเตอร์</h3>
+                        <p>รางวัลชนะเลิศ ระดับอาชีวศึกษาจังหวัด (พ.ศ. 2568)</p>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80" alt="เกียรติบัตร 2" class="cert-img">
+                    </div>
+                    <div class="cert-info">
+                        <h3>อบรมเชิงปฏิบัติการ IT Support</h3>
+                        <p>ผ่านการอบรมหลักสูตรการดูแลและแก้ไขปัญหาคอมพิวเตอร์องค์กร</p>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="cert-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=500&q=80" alt="เกียรติบัตร 3" class="cert-img">
+                    </div>
+                    <div class="cert-info">
+                        <h3>ฝึกประสบการณ์วิชาชีพ (IT Support)</h3>
+                        <p>เกียรติบัตรผ่านการปฏิบัติงานซ่อมบำรุงระบบไอที</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. ส่วนกิจกรรมและผลงานการปฏิบัติงาน -->
+        <section class="content-section">
+            <h2 class="section-title">กิจกรรมและผลงานการปฏิบัติงาน</h2>
+            <div class="activities-grid">
+                
+                <div class="activity-card">
+                    <div class="activity-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80" alt="กิจกรรมจิตอาสาซ่อมคอมพิวเตอร์" class="activity-img">
+                    </div>
+                    <div class="activity-info">
+                        <h3>โครงการจิตอาสาซ่อมบำรุงคอมพิวเตอร์โรงเรียนชุมชน</h3>
+                        <div class="date">พ.ศ. 2568</div>
+                        <p>ลงพื้นที่ให้บริการตรวจเช็ค ทำความสะอาด ลงระบบปฏิบัติการ และซ่อมบำรุงคอมพิวเตอร์ห้องเรียนคอมพิวเตอร์ให้กับโรงเรียนในพื้นที่</p>
+                    </div>
+                </div>
+
+                <div class="activity-card">
+                    <div class="activity-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=500&q=80" alt="กิจกรรมอบรมระบบเครือข่าย" class="activity-img">
+                    </div>
+                    <div class="activity-info">
+                        <h3>เข้าร่วมการอบรมเชิงปฏิบัติการติดตั้งระบบเครือข่าย LAN/Wi-Fi</h3>
+                        <div class="date">พ.ศ. 2568</div>
+                        <p>เรียนรู้และปฏิบัติจริงเกี่ยวกับการเข้าหัวสาย LAN (RJ-45), การจัดตั้งค่า Router/Switch และการแก้ไขปัญหาระดับพื้นฐาน</p>
+                    </div>
+                </div>
+
+                <div class="activity-card">
+                    <div class="activity-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?auto=format&fit=crop&w=500&q=80" alt="กิจกรรมบริการซ่อมบำรุงไอที" class="activity-img">
+                    </div>
+                    <div class="activity-info">
+                        <h3>บริการตรวจเช็คและบำรุงรักษาคอมพิวเตอร์ประจำปี</h3>
+                        <div class="date">พ.ศ. 2568</div>
+                        <p>ร่วมกับทีมแผนกเทคโนโลยีสารสนเทศในการทำ Preventive Maintenance (PM) เป่าฝุ่น เปลี่ยนซิลิโคนระบายความร้อน และเช็คสภาพอุปกรณ์</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. ส่วนช่องทางการติดต่อ -->
+        <section class="content-section">
+            <h2 class="section-title">ช่องทางการติดต่อ</h2>
+            <div class="contact-grid">
+                <a href="mailto:micalhehe@email.com" class="contact-card">
+                    <strong>อีเมล</strong>
+                    <span>micalhehe@email.com</span>
+                </a>
+                <a href="tel:0812345678" class="contact-card">
+                    <strong>เบอร์โทรศัพท์</strong>
+                    <span>081-234-5678</span>
+                </a>
+                <a href="https://line.me" target="_blank" class="contact-card">
+                    <strong>Line ID</strong>
+                    <span>385489489</span>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 MyPortfolio.</p>
+    </footer>
+
 </body>
 </html>
